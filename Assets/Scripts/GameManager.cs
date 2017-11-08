@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject heartPrefab;
     [SerializeField] private float heartSpawnTime = 20.0f;
     private bool heartSpawned = false;
+    private InfoPlayer infoPlayer;
 
     private const string TEXT_LIFES = "Lifes : ";
 
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         textLifes.text = TEXT_LIFES + lifes;
         StartCoroutine(HeartSpawning());
+        infoPlayer = FindObjectOfType<InfoPlayer>();
     }
 	
 	// Update is called once per frame
@@ -32,13 +34,14 @@ public class GameManager : MonoBehaviour
     public void PlayerDie()
     {
         lifes--;
-        if(lifes > 0)
+        infoPlayer.CountPlayerDie();
+        if (lifes > 0)
         {
             textLifes.text = TEXT_LIFES + lifes;
         }
         else
         {
-            SceneManager.LoadScene("DieMenu");
+            SceneManager.LoadScene("GameOver");
         }
     }
 

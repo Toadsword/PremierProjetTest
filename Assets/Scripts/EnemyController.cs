@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class EnemyController : MonoBehaviour
                 if (life == 0)
                 {
                     Destroy(gameObject);
+                    SceneManager.LoadScene("WinScene");
                 }
             }
         }
