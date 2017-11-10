@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         render.flipX = horizontalInput < 0;
         playerAnimationController.SetFloat("SpeedX", Mathf.Abs(horizontalInput));
+        playerAnimationController.SetFloat("SpeedY", rigid.velocity.y);
         Vector2 forceDirection = new Vector2(horizontalInput, 0);
         forceDirection *= 10;
         rigid.AddForce(forceDirection);
@@ -55,14 +56,13 @@ public class PlayerController : MonoBehaviour
         bool touchFloor = Physics2D.OverlapCircle(positionRaycastJump.position, radiusRaycastJump, layerMaskJump);
         if (Input.GetAxis("Jump") > 0 && touchFloor)
         {
-            playerAnimationController.SetTrigger("Jump");
+            playerAnimationController.SetTrigger("Jumped");
             rigid.AddForce(Vector2.up * forceJump, ForceMode2D.Impulse);
         }
         else
         {
             playerAnimationController.SetBool("IsGrounded", touchFloor);
         }
-        
 
         if(Input.GetAxis("Fire1") > 0)
         {

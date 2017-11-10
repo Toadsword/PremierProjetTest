@@ -14,11 +14,15 @@ public class EnemyController : MonoBehaviour
     private float lastTimeTouched = -5; // Dernier moment ou il s'est fait touché 
 
     private float life = 5;
+    private float delayAnimation = 0.3f;
     private bool isTransparent = false;
+
+    private Animator enemyAnimationController;
 
     // Use this for initialization
     void Start ()
     {
+        enemyAnimationController = GetComponent<Animator>();
         StartCoroutine(Fire());
     }
 	
@@ -31,7 +35,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color(255, 0, 255, 1);
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
         }
     }
 
@@ -40,7 +44,9 @@ public class EnemyController : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(time2Fire);
-            foreach(Transform t in gunsTransformList)
+            enemyAnimationController.SetTrigger("Attacking");
+            yield return new WaitForSeconds(delayAnimation);
+            foreach (Transform t in gunsTransformList)
             {
                 GameObject bullet = Instantiate(bulletPrefab, t.position, t.rotation);
                 bullet.GetComponent<Rigidbody2D>().velocity = t.right * bulletVelocity;
