@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float bulletVelocity = 8.0f;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float timeInvulnerability = 2.0f; // Temps d'invulnérabilité
+    private float timeAnimationFire = 0.3f;
     private float lastTimeTouched = -5; // Dernier moment ou il s'est fait touché 
 
     private float life = 5;
@@ -47,6 +48,7 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(time2Fire);
             enemyAnimationController.SetTrigger("Attacking");
+            yield return new WaitForSeconds(timeAnimationFire);
 
             foreach (Transform t in gunsTransformList)
             {
