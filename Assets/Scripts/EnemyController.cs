@@ -18,11 +18,13 @@ public class EnemyController : MonoBehaviour
     private bool isTransparent = false;
 
     private Animator enemyAnimationController;
+    private GameManager gameManager;
 
     // Use this for initialization
     void Start ()
     {
         enemyAnimationController = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
         StartCoroutine(Fire());
     }
 	
@@ -66,7 +68,7 @@ public class EnemyController : MonoBehaviour
                 if (life == 0)
                 {
                     Destroy(gameObject);
-                    SceneManager.LoadScene("WinScene");
+                    gameManager.CheckWin();
                 }
             }
         }
