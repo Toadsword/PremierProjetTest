@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private bool heartSpawned = false;
     private InfoPlayer infoPlayer;
 
+    private EnemiesManager enemiesManager;
+
     private const string TEXT_LIFES = "Lifes : ";
 
     // Use this for initialization
@@ -22,14 +24,9 @@ public class GameManager : MonoBehaviour
     {
         textLifes.text = TEXT_LIFES + lifes;
         StartCoroutine(HeartSpawning());
+        enemiesManager = FindObjectOfType<EnemiesManager>();
         infoPlayer = FindObjectOfType<InfoPlayer>();
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     public void PlayerDie()
     {
@@ -67,13 +64,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CheckWin()
+    {
+        if (enemiesManager.GetMonsterCount() == 0)
+        {
+            LoadNextLevel();
+        }
+    }
+
+    public void LoadNextLevel()
+    {
+        if (SceneManager.GetActiveScene().name == "FirstLevel")
+        {
+            LoadScene("SecondLevel");
+        }
+        else if (SceneManager.GetActiveScene().name == "SecondLevel")
+        {
+            LoadScene("WinScene");
+        }
+    }
+
     public void LoadScene(string levelName)
     {
         SceneManager.LoadScene(levelName);
-    }
-
-    public void CheckWin()
-    {
-
     }
 }

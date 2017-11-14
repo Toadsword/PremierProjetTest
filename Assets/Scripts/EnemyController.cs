@@ -14,26 +14,26 @@ public class EnemyController : MonoBehaviour
     private float lastTimeTouched = -5; // Dernier moment ou il s'est fait touché 
 
     private float life = 5;
-    private float delayAnimation = 0.3f;
     private bool isTransparent = false;
 
     private Animator enemyAnimationController;
-    private GameManager gameManager;
+    private EnemiesManager enemiesManager;
 
     // Use this for initialization
     void Start ()
     {
         enemyAnimationController = GetComponent<Animator>();
-        gameManager = FindObjectOfType<GameManager>();
+        enemiesManager = FindObjectOfType<EnemiesManager>();
+        enemiesManager.AddMonster();
         StartCoroutine(Fire());
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(isInvulnerable(true))
+        if(IsInvulnerable(true))
         {
-            animateInvulnerability();
+            AnimateInvulnerability();
         }
         else
         {
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(time2Fire);
             enemyAnimationController.SetTrigger("Attacking");
-            yield return new WaitForSeconds(delayAnimation);
+
             foreach (Transform t in gunsTransformList)
             {
                 GameObject bullet = Instantiate(bulletPrefab, t.position, t.rotation);
@@ -62,19 +62,19 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "AllyBullet")
         {
-            if(!isInvulnerable(false))
+            if(!IsInvulnerable(false))
             {
                 life--;
                 if (life == 0)
                 {
                     Destroy(gameObject);
-                    gameManager.CheckWin();
+                    enemiesManager.RemoveMonster();
                 }
             }
         }
     }
 
-    private bool isInvulnerable(bool isCheck)
+    private bool IsInvulnerable(bool isCheck)
     {
         if (Time.realtimeSinceStartup - lastTimeTouched > timeInvulnerability)
         { 
@@ -90,7 +90,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void animateInvulnerability()
+    private void AnimateInvulnerability()
     {
         if(isTransparent)
         {

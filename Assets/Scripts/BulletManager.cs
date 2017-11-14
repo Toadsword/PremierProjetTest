@@ -17,15 +17,11 @@ public class BulletManager : MonoBehaviour
 		
 	}
 
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.tag == "Player" && gameObject.tag == "EnemyBullet") || 
-            (collision.tag == "Enemy" && gameObject.tag == "AllyBullet"))
+            (collision.tag == "Enemy" && gameObject.tag == "AllyBullet") ||
+            collision.tag == "Limit")
         {
             Destroy(gameObject);
         }
@@ -37,4 +33,5 @@ public class BulletManager : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+    
 }
