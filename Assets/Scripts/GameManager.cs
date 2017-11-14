@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(heartSpawnTime);
-            if(!heartSpawned)
+            if(!heartSpawned && heartSpawnsList.Length > 0)
             {
                 int spawnNumber = (int) Random.Range(0.0f, heartSpawnsList.GetLength(0));
                 Transform spawner = heartSpawnsList[spawnNumber];
