@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
         spawnTransform = GameObject.Find("Spawn").transform;
 
         distToGround = GetComponent<Collider2D>().bounds.extents.y;
+
+        FindObjectOfType<PauseScript>().OnPauseEvent += OnPauseGame;
     }
 	
 	// Update is called once per frame
@@ -92,19 +94,19 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collider.tag == "Limit" || collider.tag == "EnemyBullet")
+        if(collision.tag == "Limit" || collision.tag == "EnemyBullet")
         {
             gameManager.PlayerDie();
             transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.position = spawnTransform.position;
         }
 
-        if(collider.tag == "Heart")
+        if(collision.tag == "Heart")
         {
             gameManager.PlayerGetLife();
-            Destroy(collider.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -180,7 +182,17 @@ public class PlayerController : MonoBehaviour
         {
             rigid.velocity = new Vector2(5.0f * Mathf.Sign(rigid.velocity.x), rigid.velocity.y);
         }
+    }
 
-        Debug.Log("Vitesse actuelle : " + rigid.velocity.x);
+    //Super pratique pour l'éditeur, ce code s'utilise quand on sélectionne le player
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(positionRaycastJump.position, radiusRaycastJump);
+    }
+
+    private void OnPauseGame()
+    {
+
     }
 }

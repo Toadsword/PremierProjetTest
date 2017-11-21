@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4012238130345678}
   - component: {fileID: 212111010810216662}
   - component: {fileID: 61816576394455140}
+  - component: {fileID: 252637007772002594}
   m_Layer: 8
   m_Name: Plateform
   m_TagString: Untagged
@@ -107,3 +108,20 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+--- !u!252 &252637007772002594
+SurfaceEffector2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922979235477982}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Speed: 1
+  m_SpeedVariation: 0
+  m_ForceScale: 0.1
+  m_UseContactForce: 0
+  m_UseFriction: 0
+  m_UseBounce: 0

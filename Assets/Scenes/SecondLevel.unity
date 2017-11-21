@@ -968,6 +968,16 @@ Prefab:
       propertyPath: m_Name
       value: BeginWall
       objectReference: {fileID: 0}
+    - target: {fileID: 252637007772002594, guid: 19434f54c501c1a4990066b950a2348c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61816576394455140, guid: 19434f54c501c1a4990066b950a2348c,
+        type: 2}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19434f54c501c1a4990066b950a2348c, type: 2}
   m_IsPrefabParent: 0
@@ -1353,7 +1363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1201036186
 Transform:
   m_ObjectHideFlags: 0
